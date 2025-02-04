@@ -30,8 +30,8 @@ Ensure you have the following installed and properly configured:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/username/repository-name.git
-   cd repository-name
+   git clone https://github.com/doublegunz/setup-laravel.git
+   cd setup-laravel
    ```
 
 2. **Make the script executable:**
@@ -80,4 +80,4 @@ After the setup is complete, you can access your project by navigating to `https
 
 ## License
 
-This repository is licensed under the [MIT License](LICENSE).
+This repository is licensed under the [GPL-3.0 license](LICENSE).
