@@ -64,11 +64,7 @@ sudo bash -c "cat > $VHOST_FILE" <<EOF
 </VirtualHost>
 EOF
 
-# Step 5: Mengaktifkan Virtual Host dan reload Apache
-sudo a2ensite "$PROJECT_NAME"
-sudo systemctl reload apache2
-
-# Step 6: Setup SSL menggunakan mkcert
+# Step 5: Setup SSL menggunakan mkcert
 if ! command -v mkcert &> /dev/null; then
     echo "mkcert is not installed. Please install it first."
     exit 1
@@ -78,6 +74,10 @@ echo "Setting up SSL with mkcert..."
 mkcert -install
 mkdir -p "$CERT_DIR"
 mkcert -cert-file "$CERT_DIR/$DOMAIN.pem" -key-file "$CERT_DIR/$DOMAIN-key.pem" "$DOMAIN"
+
+# Step 6: Mengaktifkan Virtual Host dan reload Apache
+sudo a2ensite "$PROJECT_NAME"
+sudo systemctl reload apache2
 
 # Step 7: Menambahkan domain ke /etc/hosts
 if ! grep -q "$DOMAIN" /etc/hosts; then
