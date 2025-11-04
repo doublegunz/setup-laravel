@@ -34,11 +34,34 @@ fi
 # 3. Memeriksa dan menginstal PHP
 if ! command_exists php; then
     install_package php
-    # Instal ekstensi PHP yang diperlukan oleh Laravel
-    install_package php-cli php-fpm php-mysql php-zip php-json php-mbstring php-xml
-    echo "PHP and required extensions installed."
+    echo "PHP installed."
+fi
+
+# Deteksi versi PHP yang terinstal
+PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;" 2>/dev/null)
+
+if [ -n "$PHP_VERSION" ]; then
+    echo "Detected PHP version: $PHP_VERSION"
+    echo "Installing required PHP extensions for Laravel..."
+
+    # Instal ekstensi PHP yang diperlukan oleh Laravel dengan versi spesifik
+    sudo apt install -y \
+        php${PHP_VERSION}-cli \
+        php${PHP_VERSION}-fpm \
+        php${PHP_VERSION}-mysql \
+        php${PHP_VERSION}-sqlite3 \
+        php${PHP_VERSION}-zip \
+        php${PHP_VERSION}-mbstring \
+        php${PHP_VERSION}-xml \
+        php${PHP_VERSION}-dom \
+        php${PHP_VERSION}-curl \
+        php${PHP_VERSION}-gd \
+        php${PHP_VERSION}-bcmath \
+        php${PHP_VERSION}-intl
+
+    echo "PHP extensions installed."
 else
-    echo "PHP is already installed."
+    echo "Could not detect PHP version. Skipping extension installation."
 fi
 
 # 4. Memeriksa dan menginstal Composer
