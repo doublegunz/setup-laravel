@@ -123,3 +123,6 @@ else
 fi
 
 echo "Setup complete! Visit https://$DOMAIN in your browser."
+echo ""
+echo "To navigate to your project directory, run:"
+echo "  cd $PROJECT_DIR"
